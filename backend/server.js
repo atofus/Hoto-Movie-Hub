@@ -3,6 +3,7 @@ const mysql = require('mysql');
 const cors = require('cors');
 
 const app = express();
+
 app.use(express.json());
 app.use(cors());
 
@@ -11,34 +12,57 @@ const db = mysql.createConnection({
     host: "localhost",
     password: 'vietnam',
     database: 'To_Alan_db'
-})
+});
 
-app.post("/register", (req, res) => {
-    db.query("INSERT INTO Users (UserID, FName, LName, Email, UserPassword) VALUES (?, ?, ?, ?, ?)", 
-    [UserId, FirstName, LastName, Email, Password], (err, result) => {
-        console.log(err);
-    }
+app.post("/Register", (req, res) => {
+    const FirstName = req.body.FirstName;
+    const LastName = req.body.LastName;
+    const Email = req.body.Email;
+    const Password = req.body.Password;
+
+    const insertSql = "INSERT INTO Users (FName, LName, Email, UserPassword) VALUES (?, ?, ?, ?)";
+
+    db.query(insertSql, [FirstName, LastName, Email, Password], (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("Registration Successful");
+            console.log(FirstName);
+            console.log(LastName);
+            console.log(Email);
+            console.log(Password);
+
+        }
+    });
+});
+
+
+app.post('/login', (req, res) => {
+    const Email = req.body.Email;
+    const Password = req.body.Password;
+
+    db.query(
+        "SELECT * FROM Users WHERE Email = ? AND UserPassword = ?"
+        [Email, Password],
+        (err, result) => {
+            if (err) {
+                res.send({ err: err })
+            }
+
+            if (result) {
+                console.log("Registration Successful");
+                res.send({result})
+
+
+            } else {
+            }
+        }
+    )
+}
 );
 
-// POST request to users extracting email and password
-app.post('/login', (req, res) => {
-    {/* Query made to select data from "Users" table */ }
 
 
-
-    const sql = "SELECT * FROM Users WHERE Email = ? AND UserPassword = ?";
-
-    db.query(sql, [req.body.email, req.body.password], (err, data) => {
-        if (err) return res.json("Login Failed");
-        if (data.length > 0) {
-            console.log("Login Successful");
-            return res.json(data);
-        } else {
-            return res.json("No Record")
-        }
-    })
-})
-
-app.listen(8081, () => {
+app.listen(3001, () => {
     console.log("listening");
 })

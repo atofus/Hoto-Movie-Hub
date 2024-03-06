@@ -4,30 +4,41 @@ import 'bootswatch/dist/vapor/bootstrap.min.css';
 import axios from 'axios'
 import { Link } from "react-router-dom";
 import Register from '../Pages/Register';
-import Validation from './LoginValidation';
+import validation from './LoginValidation';
 
 function Login() {
     const [values, setValues] = useState({
-        email: '',
-        password: ' '
+        emailReg: '',
+        passwordReg: ' '
     })
 
     const [errors, setErrors] = useState({});
 
+    const [emailReg, setEmail] = useState("");
+    const [passwordReg, setPassword] = useState("");
+
+
     const handleInput = (event) => {
-        setValues(prev => ({...prev, [event.target.name]: [event.target.value]}))
+        setValues(prev => ({ ...prev, [event.target.name]: [event.target.value] }))
     }
+
 
     function handleSubmit(event) {
         event.preventDefault();
-        setErrors(Validation(values));
-        {/** 
-        
-        axios.post('http://localhost:8081/login', { email, password })
-            .then(res => console.log(res))
-            .catch(err => console.log(err));
-    */}
+        setErrors(validation(values));
+        {
+
+            axios.post('http://localhost:3001/Login',
+                {
+                    Email: emailReg,
+                    Password: passwordReg
+
+                })
+                .then(res => console.log(res))
+                .catch(err => console.log(err));
+        }
     }
+
 
     return (
         <div className='d-flex vh-100 justify-content-center align-items-center bg-primary'>
@@ -37,19 +48,21 @@ function Login() {
                     {/* When input changes, setEmail retrieves value and update email variable */}
                     <input type="email" className="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email" name='email'
 
-                        onChange={handleInput}/>
-                    {errors.email && <span className='text-danger'> {errors.email} </span>}
+                        onChange={(e) => {
+                            setEmail(e.target.value)
+                        }} />
 
                     <small id="emailHelp" style={{ color: 'white' }} >We'll never share your email with anyone else.</small>
                 </div>
                 <div className='mb-3'>
-                    <label htmlFor="inputPassword" className="form-label mt-4" style={{ color: 'white' }} name = 'password'>Password</label>
+                    <label htmlFor="inputPassword" className="form-label mt-4" style={{ color: 'white' }} name='password'>Password</label>
                     {/* When input changes, setPassword retrieves value and update password variable */}
 
-                    <input type="password" className="form-control" id="inputPassword" placeholder="Password" autocomplete="off" name = 'password'
-                        onChange={handleInput}
+                    <input type="password" className="form-control" id="inputPassword" placeholder="Password" autocomplete="off" name='password'
+                        onChange={(e) => {
+                            setPassword(e.target.value)
+                        }}
                     />
-                    {errors.password && <span className='text-danger'> {errors.password} </span>}
 
 
                 </div>
