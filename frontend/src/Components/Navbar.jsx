@@ -44,6 +44,57 @@ const Navbar = () => {
                   Watchlist
                 </a>
               </li>
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  href="#"
+                  role="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  GENRES
+                </a>
+                <div className="dropdown-menu">
+                  <a className="dropdown-action" href="#">
+                    Action <br />
+                  </a>
+                  <a className="dropdown-adventure" href="#">
+                    Adventure <br />
+                  </a>
+                  <a className="dropdown-fantasy" href="#">
+                    Fantasy <br />
+                  </a>
+                  <a className="dropdown-comedy" href="#">
+                    Comedy <br />
+                  </a>
+                  <a className="dropdown-horror" href="#">
+                    Horror <br />
+                  </a>
+                  <a className="dropdown-romance" href="#">
+                    Romance <br />
+                  </a>
+                  <a className="dropdown-drama" href="#">
+                    Drama <br />
+                  </a>
+                  <a className="dropdown-sci" href="#">
+                    SCI-FI <br />
+                  </a> 
+                  <a className="dropdown-western" href="#">
+                    Western <br />
+                  </a>
+                  <a className="dropdown-mystery" href="#">
+                    Mystery <br />
+                  </a>
+                  <a className="dropdown-comic" href="#">
+                    Comic Book <br />
+                  </a>
+                  <a className="dropdown-animation" href="#">
+                    Animation <br />
+                  </a>
+
+                </div>
+              </li>
             </ul>
           </div>
         </div>
