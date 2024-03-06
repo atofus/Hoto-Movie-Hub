@@ -6,33 +6,23 @@ function validation(values)  {
     const passwordPattern = /^(?=.*[A-Z]).{2,}$/;
     const namePattern = /^.+$/;
 
-    if (values.email === "") {
+    if (values.emailReg === "") {
         error.email = "Email should not be empty";
     }
-    else if (!emailPattern.test(values.email)) {
+    else if (!emailPattern.test(values.emailReg)) {
         error.email = "Email format is invalid";
     } else {
         error.email = "";
     }
 
-    if (values.password === "") {
+    if (values.passwordReg === "") {
         error.password = "Password should not be empty";
     }
-    else if (!passwordPattern.test(values.password)) {
+    else if (!passwordPattern.test(values.passwordReg)) {
         error.password = "Password must be at least two characters long";
     } else {
         error.password = "";
     }
-
-    if (values.name === "") {
-        error.name = "Name should not be empty";
-    }
-    else if (!namePattern.test(values.name)) {
-        error.name  = "Name format is invalid";
-    } else {
-        error.name = "";
-    }
-
 
     return error;
 }

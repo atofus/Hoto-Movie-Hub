@@ -3,29 +3,36 @@ import { Link } from "react-router-dom";
 import { useState } from 'react';
 import validation from '../Components/SignUpValidation';
 
-function Register({setShowNavbar}) {
+function Register() {
     const [values, setValues] = useState({
-        email: '',
-        password: '',
-        FName: '',
-        LName: ''
+
+    emailReg: '',
+    passwordReg: '', 
     })
 
+    const [FnameReg, setFirstName] = useState("");
+    const [LnameReg, setLastName] = useState("");
+    const [emailReg, setEmail] = useState("");
+    const [passwordReg, setPassword] = useState("");
     const [errors, setErrors] = useState({});
 
-    const handleInput = (event) => {
-        setValues(prev => ({ ...prev, [event.target.name]: [event.target.value] }))
-    }
 
     function handleSubmit(event) {
         event.preventDefault();
         setErrors(validation(values));
-        {/** 
+        {
             
-            axios.post('http://localhost:8081/login', { email, password })
+            axios.post('http://localhost:3001/Register', 
+            { 
+                FirstName: FnameReg,
+                LastName: LnameReg,
+                Email: emailReg,
+                Password: passwordReg
+            
+            })
                 .then(res => console.log(res))
                 .catch(err => console.log(err));
-        */}
+        }
     }
     return (
         <>
@@ -42,31 +49,34 @@ function Register({setShowNavbar}) {
                     </div>
 
                     <div style={{ display: 'flex' }}>
-                        <input type="text" id="inputFirstName" placeholder='First Name' className="form-control" style={{ width: '140px' }} name='FName'
-                            onChange={handleInput} />
+                        <input type="text" id="inputFirstName" placeholder='First Name' className="form-control" style={{ width: '140px' }} name='FnameReg'
+                            onChange={(e) => {
+                                setFirstName(e.target.value)
+                                }} 
+                                />
                     <hr className="my-1" />
 
 
 
 
-                        <input type="text" id="inputLastName" placeholder='Last Name' className="form-control" style={{ width: '140px', marginLeft: '60px' }} name='LName'
-                            onChange={handleInput} />
+                        <input type="text" id="inputLastName" placeholder='Last Name' className="form-control" style={{ width: '140px', marginLeft: '60px' }} name='LnameReg'
+                             onChange={(e) => {setLastName(e.target.value)}} />
 
                     </div>
                     <label htmlFor="inputEmail" className="form-label mt-4" >Email</label>
-                    <input type="email" className="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email" name='email'
-                        onChange={handleInput} />
+                    <input type="email" className="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email" name='emailReg'
+                         onChange={(e) => {setEmail(e.target.value)}} />
 
-                    {errors.email && <span className='text-danger'> {errors.email} </span>}
+                    {errors.emailReg && <span className='text-danger'> {errors.emailReg} </span>}
 
                     <hr className="my-1" />
 
                     <label htmlFor="inputLastName" className="form-label mt-4" >Password</label>
 
-                    <input type="password" className="form-control" id="inputPassword" placeholder="Password" autocomplete="off" name = 'password'
-                        onChange={handleInput}
+                    <input type="password" className="form-control" id="inputPassword" placeholder="Password" autocomplete="off" name = 'passwordReg'
+                         onChange={(e) => {setPassword(e.target.value)}}
                     />
-                    {errors.password && <span className='text-danger'> {errors.password}</span>}
+                    {errors.passwordReg && <span className='text-danger'> {errors.passwordReg}</span>}
 
                     <button type="submit" className="btn btn-secondary">Create Account</button>
                     <p>Already have an Account? <Link to='/Login'>Login</Link></p>

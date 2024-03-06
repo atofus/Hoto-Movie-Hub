@@ -3,6 +3,7 @@ const mysql = require('mysql');
 const cors = require('cors');
 
 const app = express();
+
 app.use(express.json());
 app.use(cors());
 
@@ -11,49 +12,58 @@ const db = mysql.createConnection({
     host: "localhost",
     password: 'vietnam',
     database: 'To_Alan_db'
-})
-
-// app.post("/register", (req, res) => {
-//     db.query("INSERT INTO Users (UserID, FName, LName, Email, UserPassword) VALUES (?, ?, ?, ?, ?)", 
-//     [UserId, FirstName, LastName, Email, Password], (err, result) => {
-//         console.log(err);
-//     }
-// );
-
-// // POST request to users extracting email and password
-// app.post('/login', (req, res) => {
-//     {/* Query made to select data from "Users" table */ }
+});
 
 
+app.post("/Register", (req, res) => {
+    const FirstName = req.body.FirstName;
+    const LastName = req.body.LastName;
+    const Email = req.body.Email;
+    const Password = req.body.Password;
 
-//     const sql = "SELECT * FROM Users WHERE Email = ? AND UserPassword = ?";
+    const insertSql = "INSERT INTO Users (FName, LName, Email, UserPassword) VALUES (?, ?, ?, ?)";
 
-//     db.query(sql, [req.body.email, req.body.password], (err, data) => {
-//         if (err) return res.json("Login Failed");
-//         if (data.length > 0) {
-//             console.log("Login Successful");
-//             return res.json(data);
-//         } else {
-//             return res.json("No Record")
-//         }
-//     })
-// })
+    db.query(insertSql, [FirstName, LastName, Email, Password], (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("Registration Successful");
+            console.log(FirstName);
+            console.log(LastName);
+            console.log(Email);
+            console.log(Password);
 
-//SELECT * FROM Movie WHERE 
+        }
+    });
+});
 
-// app.get('/Home', async(req, res) => {
-//     const MovieInput = req.body.MovieReg;
-//     const sql = "SELECT * FROM Movie WHERE Title = ?"
-//     db.query(qry, [MovieInput], (err, result) => {
-//         db.end();
-//         if (err) throw err;
-        
-//         if (result) {
-//             console.log("it connected!");
-//             res.send({result});
-//         }
-//     })
-// });
+
+app.post('/Login', (req, res) => {
+    const Email = req.body.Email;
+    const Password = req.body.Password;
+    
+    db.query(
+        "SELECT * FROM Users WHERE Email = ? AND UserPassword = ?",
+        [Email, Password],
+        (err, result) => {
+            if (err) {
+                res.send({err: err})
+
+            } if(result.length > 0) {
+                res.send(result);
+                console.log("Successful");
+
+                console.log(Email);
+                console.log(Password);
+            } 
+            else {
+                console.log("Not successful");
+
+            }
+        }
+    );
+});
+
 
 app.post('/Homes', async (req, res) => {
     const searchTerm = req.body.searchTerm;
@@ -69,16 +79,7 @@ app.post('/Homes', async (req, res) => {
     })
   });
 
-// db.query('select * from To_Alan_db.Movie', (err, result, fields) => {
-//     if (err) {
-//         return console.log(err);
-//     } 
-//     return console.log(result);
-//     db.end();
-// })
 
-
-
-app.listen(8081, () => {
+app.listen(3001, () => {
     console.log("listening");
 })

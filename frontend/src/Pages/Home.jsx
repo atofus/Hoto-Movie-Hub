@@ -9,7 +9,7 @@ const Home = () => {
   const [searchResults, setSearchResults] = useState([]);
 
   const handleSearch = async () => {
-    const response = await axios.post('http://localhost:3000/Home', { searchTerm });
+    const response = await axios.post('http://localhost:3001/Home', { searchTerm });
     setSearchResults(response.data);
   };
 
