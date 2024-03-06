@@ -2,7 +2,8 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import { useState } from 'react';
 import validation from '../Components/SignUpValidation';
-function Register() {
+
+function Register({setShowNavbar}) {
     const [values, setValues] = useState({
         email: '',
         password: '',
@@ -26,7 +27,6 @@ function Register() {
                 .catch(err => console.log(err));
         */}
     }
-
     return (
         <>
             <div className='d-flex vh-100 justify-content-center align-items-center bg-primary'>
