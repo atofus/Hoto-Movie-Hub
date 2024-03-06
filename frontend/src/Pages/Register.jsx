@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import { useState } from 'react';
 import validation from '../Components/SignUpValidation';
+import axios from 'axios';
 
 function Register() {
     const [values, setValues] = useState({
@@ -22,7 +23,7 @@ function Register() {
         setErrors(validation(values));
         {
             
-            axios.post('http://localhost:3001/Register', 
+            axios.post('http://localhost:3000/Register', 
             { 
                 FirstName: FnameReg,
                 LastName: LnameReg,

@@ -65,7 +65,7 @@ app.post('/Login', (req, res) => {
 });
 
 
-app.post('/Homes', async (req, res) => {
+app.post('/Home', async (req, res) => {
     const searchTerm = req.body.searchTerm;
 
     const querySQL = "SELECT * FROM Movie WHERE Title LIKE ?";
