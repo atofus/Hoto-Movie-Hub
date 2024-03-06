@@ -7,8 +7,8 @@ import axios from 'axios';
 function Register() {
     const [values, setValues] = useState({
 
-    emailReg: '', // Initialize with empty string
-    passwordReg: '', // Initialize with empty string
+    emailReg: '',
+    passwordReg: '', 
     })
 
     const [FnameReg, setFirstName] = useState("");

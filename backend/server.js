@@ -65,6 +65,20 @@ app.post('/Login', (req, res) => {
 });
 
 
+app.post('/Homes', async (req, res) => {
+    const searchTerm = req.body.searchTerm;
+
+    const querySQL = "SELECT * FROM Movie WHERE Title LIKE ?";
+    db.query(querySQL, [searchTerm], (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("connected!");
+        console.log(searchTerm);
+      }
+    })
+  });
+
 
 app.listen(3001, () => {
     console.log("listening");
