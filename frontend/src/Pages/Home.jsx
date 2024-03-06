@@ -5,20 +5,13 @@ import React, {useEffect, useState} from 'react';
 
 const Home = () => {
 
-  const[searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
-
-  useEffect(() => {
-    if (searchTerm.trim() !== '') {
-      fetch(`http://localhost:3000/Contact`)
-        .then(response => response.json())
-        .then(data => setSearchResults(data))
-        .catch(error => console.error(error));
-    } else {
-      setSearchResults([]);
-    }
-  }, [searchTerm]);
+  const handleSearch = async () => {
+    const response = await axios.post('http://localhost:3000/Home', { searchTerm });
+    setSearchResults(response.data);
+  };
 
 
   return (
@@ -26,7 +19,7 @@ const Home = () => {
           <div class = "search-container">
               <input type="text" id="SearchBar" placeholder='Search for Movie' className="Search" name='movieReg' 
                 value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
-            <button className="searchBtn" type="submit">
+            <button className="searchBtn" type="submit" onClick={handleSearch}>
                 Search
             </button>  
             {/*<script src="server.js"></script>*/}

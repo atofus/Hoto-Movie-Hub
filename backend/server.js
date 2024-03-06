@@ -55,10 +55,10 @@ const db = mysql.createConnection({
 //     })
 // });
 
-app.post('/Contact', async (req, res) => {
-    const searchTerm = req.query.movieReg;
+app.post('/Homes', async (req, res) => {
+    const searchTerm = req.body.searchTerm;
 
-    const querySQL = "SELECT * FROM Movie WHERE Title = ?";
+    const querySQL = "SELECT * FROM Movie WHERE Title LIKE ?";
     db.query(querySQL, [searchTerm], (err, result) => {
       if (err) {
         console.log(err);
@@ -77,8 +77,6 @@ app.post('/Contact', async (req, res) => {
 //     db.end();
 // })
 
-
-db.end();
 
 
 app.listen(8081, () => {
