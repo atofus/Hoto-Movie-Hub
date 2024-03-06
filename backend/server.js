@@ -14,6 +14,7 @@ const db = mysql.createConnection({
     database: 'To_Alan_db'
 });
 
+
 app.post("/Register", (req, res) => {
     const FirstName = req.body.FirstName;
     const LastName = req.body.LastName;
@@ -37,29 +38,31 @@ app.post("/Register", (req, res) => {
 });
 
 
-app.post('/login', (req, res) => {
+app.post('/Login', (req, res) => {
     const Email = req.body.Email;
     const Password = req.body.Password;
-
+    
     db.query(
-        "SELECT * FROM Users WHERE Email = ? AND UserPassword = ?"
+        "SELECT * FROM Users WHERE Email = ? AND UserPassword = ?",
         [Email, Password],
         (err, result) => {
             if (err) {
-                res.send({ err: err })
-            }
+                res.send({err: err})
 
-            if (result) {
-                console.log("Registration Successful");
-                res.send({result})
+            } if(result.length > 0) {
+                res.send(result);
+                console.log("Successful");
 
+                console.log(Email);
+                console.log(Password);
+            } 
+            else {
+                console.log("Not successful");
 
-            } else {
             }
         }
-    )
-}
-);
+    );
+});
 
 
 

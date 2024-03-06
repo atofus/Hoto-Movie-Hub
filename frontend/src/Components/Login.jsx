@@ -12,15 +12,9 @@ function Login() {
         passwordReg: ' '
     })
 
-    const [errors, setErrors] = useState({});
-
     const [emailReg, setEmail] = useState("");
     const [passwordReg, setPassword] = useState("");
-
-
-    const handleInput = (event) => {
-        setValues(prev => ({ ...prev, [event.target.name]: [event.target.value] }))
-    }
+    const [errors, setErrors] = useState({});
 
 
     function handleSubmit(event) {
@@ -50,7 +44,8 @@ function Login() {
 
                         onChange={(e) => {
                             setEmail(e.target.value)
-                        }} />
+                    }} 
+                    />
 
                     <small id="emailHelp" style={{ color: 'white' }} >We'll never share your email with anyone else.</small>
                 </div>
@@ -63,7 +58,6 @@ function Login() {
                             setPassword(e.target.value)
                         }}
                     />
-
 
                 </div>
                 <button type="submit" className="btn btn-secondary">Login</button>
