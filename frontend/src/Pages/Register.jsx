@@ -23,7 +23,7 @@ function Register() {
         setErrors(validation(values));
         {
             
-            axios.post('http://localhost:3001/Register', 
+            axios.post('http://localhost:3000/Register', 
             { 
                 FirstName: FnameReg,
                 LastName: LnameReg,
@@ -35,7 +35,6 @@ function Register() {
                 .catch(err => console.log(err));
         }
     }
-
     return (
         <>
             <div className='d-flex vh-100 justify-content-center align-items-center bg-primary'>
