@@ -21,7 +21,7 @@ function App() {
   return (
     <>
       <Router>
-      <Navbar/>
+       <Navbar/> 
         <Routes>
           <Route path="/" element={<Login />} /> {/* Default route */}
           <Route path="/Login" element={<Login />} />
