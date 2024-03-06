@@ -8,30 +8,31 @@ import { Route } from 'react-router-dom';
 import Register from './Pages/Register';
 import { Routes } from 'react-router-dom';
 
-//import Navbar from "./Components/navbar"
-import { Home } from "./Pages/Home";
-// import Contact from "./Pages/Contact";
-// import About from "./Pages/About";
-// import WatchList from "./Pages/Watchlist";
+import Navbar from './Components/Navbar';
+import Home from './Pages/Home';
+import About from './Pages/About';
+import MoviePage from './Pages/MoviePage';
+import Contact from './Pages/Contact';
+import Watchlist from './Pages/Watchlist';
+
 
 
 function App() {
-
-
   return (
     <>
-
       <Router>
+       <Navbar/> 
         <Routes>
+          <Route path="/" element={<Login />} /> {/* Default route */}
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
-          <Route path="/Home" element= {<Home />} />
-          {/* <Route path="/Contact" element= {<Contact />} />
-          <Route path="/About" element= {<About />} />
-          <Route path="/WatchList" element= {<WatchList />} /> */}
+          <Route path="/Home" element={<Home />} />
+          <Route path="/About" element={<About />} />
+          <Route path="/MoviePage" element={<MoviePage />} />
+          <Route path="/Contact" element={<Contact />} />
+          <Route path="/Watchlist" element={<Watchlist />} />
 
         </Routes>
-
       </Router>
     </>
   );
