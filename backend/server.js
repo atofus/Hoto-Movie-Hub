@@ -64,21 +64,25 @@ app.post('/Login', (req, res) => {
     );
 });
 
-
-app.post('/Homes', async (req, res) => {
+app.post('/Home', async (req, res) => {
     const searchTerm = req.body.searchTerm;
 
     const querySQL = "SELECT * FROM Movie WHERE Title LIKE ?";
-    db.query(querySQL, [searchTerm], (err, result) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("connected!");
-        console.log(searchTerm);
-      }
-    })
-  });
-
+    db.query(querySQL, [`%${searchTerm}%`], (err, result) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send('Error searching for movies');
+        } else {
+            if (result.length > 0) {
+                console.log("Movies found:", result);
+                res.send(result);
+            } else {
+                console.log("No movies found for the search term:", searchTerm);
+                res.send([]);
+            }
+        }
+    });
+});
 
 app.listen(3001, () => {
     console.log("listening");
