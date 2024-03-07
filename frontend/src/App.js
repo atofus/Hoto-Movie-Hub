@@ -31,7 +31,7 @@ function App() {
           <Route path="/MoviePage" element={<MoviePage />} />
           <Route path="/Contact" element={<Contact />} />
           <Route path="/Watchlist" element={<Watchlist />} />
-
+                    
         </Routes>
       </Router>
     </>

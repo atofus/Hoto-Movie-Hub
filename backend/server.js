@@ -64,10 +64,8 @@ app.post('/Login', (req, res) => {
     );
 });
 
-<<<<<<< HEAD
 
-=======
->>>>>>> d993194a78b5abc9bc52c671031892fdb2635ce8
+
 app.post('/Home', async (req, res) => {
     const searchTerm = req.body.searchTerm;
 
