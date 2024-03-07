@@ -64,8 +64,6 @@ app.post('/Login', (req, res) => {
     );
 });
 
-
-
 app.post('/Home', async (req, res) => {
     const searchTerm = req.body.searchTerm;
 
@@ -85,6 +83,31 @@ app.post('/Home', async (req, res) => {
         }
     });
 });
+
+app.post('/Genre/:genre', async (req, res) => {
+    const searchGenre = req.body.searchGenre;
+
+    const querySQL = "SELECT * FROM Movie JOIN MovieGenre ON MovieGenre.MovieID = Movie.MovieID JOIN Genre ON MovieGenre.GenreID = Genre.GenreID WHERE Genre.GenreName = ?";
+    db.query(querySQL, [`%${searchGenre}%`], (err, result) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send('Error searching for movies');
+        } else {
+            if (result.length > 0) {
+                console.log("Movies found:", result);
+                res.send(result);
+            } else {
+                console.log("No movies found for the search term:", searchTerm);
+                res.send([]);
+            }
+        }
+    });
+});
+
+
+
+
+
 
 app.listen(3001, () => {
     console.log("listening");

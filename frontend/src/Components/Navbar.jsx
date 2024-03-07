@@ -1,8 +1,22 @@
-import React from 'react'
 import './Navbar.css'
+import React, { useState } from 'react'; // Removed useEffect because it's not being used
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 const Navbar = () => {
+  const [selectedGenre, setSelectedGenre] = useState('');
+  const genres = ['Action', 'Adventure', 'Fantasy', 'Comedy', 'Horror', 'Romance', 'Drama', 'SCI-FI', 'Western', 'Mystery', 'Comic Book', 'Animation'];
+
+  const handleGenreChange = (genre) => {
+    setSelectedGenre(genre);
+  };
+
+  const fetchMovies = async (genre) => {
+      const response = await axios.get(`/Genre/${genre}`);
+      // Handle response to display movies on the genre page
+  };
+
   return (
 
       <nav className="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
@@ -53,48 +67,57 @@ const Navbar = () => {
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  GENRES
+                  Genres
                 </a>
                 <div className="dropdown-menu">
-                  <a className="dropdown-action" href="#">
+                  {/* <a className="dropdown-action" href="/Genre/Action">
                     Action <br />
                   </a>
-                  <a className="dropdown-adventure" href="#">
+                  <a className="dropdown-adventure" href="/Genre/Adventure">
                     Adventure <br />
                   </a>
-                  <a className="dropdown-fantasy" href="#">
+                  <a className="dropdown-fantasy" href="/Genre/Fantasy">
                     Fantasy <br />
                   </a>
-                  <a className="dropdown-comedy" href="#">
+                  <a className="dropdown-comedy" href="/Genre/Comedy">
                     Comedy <br />
                   </a>
-                  <a className="dropdown-horror" href="#">
+                  <a className="dropdown-horror" href="/Genre/Horror">
                     Horror <br />
                   </a>
-                  <a className="dropdown-romance" href="#">
+                  <a className="dropdown-romance" href="/Genre/Romance">
                     Romance <br />
                   </a>
-                  <a className="dropdown-drama" href="#">
+                  <a className="dropdown-drama" href="/Genre/Drama">
                     Drama <br />
                   </a>
-                  <a className="dropdown-sci" href="#">
+                  <a className="dropdown-sci" href="/Genre/SCI-FI">
                     SCI-FI <br />
                   </a> 
-                  <a className="dropdown-western" href="#">
+                  <a className="dropdown-western" href="/Genre/Western">
                     Western <br />
                   </a>
-                  <a className="dropdown-mystery" href="#">
+                  <a className="dropdown-mystery" href="/Genre/Mystery">
                     Mystery <br />
                   </a>
-                  <a className="dropdown-comic" href="#">
+                  <a className="dropdown-comic" href="/Genre/Comic">
                     Comic Book <br />
                   </a>
-                  <a className="dropdown-animation" href="#">
+                  <a className="dropdown-animation" href="/Genre/Animation">
                     Animation <br />
                   </a>
 
-                </div>
-              </li>
+                </div> 
+  </li>*/}
+                    {genres.map((genre) => (
+                        <li key={genre}>
+                            <Link to={`/Genre/${genre.toLowerCase()}`} onClick={() => fetchMovies(genre)}>
+                                {genre}
+                            </Link>
+                        </li>
+                    ))}
+                    </div> 
+                </li>
             </ul>
           </div>
         </div>

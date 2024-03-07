@@ -23,7 +23,7 @@ function Register() {
         setErrors(validation(values));
         {
             
-            axios.post('http://localhost:3000/Register', 
+            axios.post('http://localhost:3001/Register', 
             { 
                 FirstName: FnameReg,
                 LastName: LnameReg,

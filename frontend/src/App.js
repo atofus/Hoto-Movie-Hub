@@ -14,6 +14,9 @@ import About from './Pages/About';
 import MoviePage from './Pages/MoviePage';
 import Contact from './Pages/Contact';
 import Watchlist from './Pages/Watchlist';
+import Switch from 'react-router-dom';
+
+import Genre from './Pages/Genre';
 
 
 
@@ -23,6 +26,7 @@ function App() {
       <Router>
        <Navbar/> 
         <Routes>
+          <Route path="/genre/:genre" component={<Genre />} />
           <Route path="/" element={<Login />} /> {/* Default route */}
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
@@ -31,7 +35,8 @@ function App() {
           <Route path="/MoviePage" element={<MoviePage />} />
           <Route path="/Contact" element={<Contact />} />
           <Route path="/Watchlist" element={<Watchlist />} />
-                    
+          <Route path="/genre/:genre" component={<Genre />} />
+          
         </Routes>
       </Router>
     </>

@@ -11,7 +11,7 @@ const Home = () => {
     event.preventDefault(); // Prevent the default form submission behavior
     try {
       // Make a POST request to the backend API
-      const response = await axios.post('http://localhost:3000/Home', {
+      const response = await axios.post('http://localhost:3001/Home', {
         searchTerm: searchTermHome
       });
       console.log(response.data); // Log the response data received from the server
