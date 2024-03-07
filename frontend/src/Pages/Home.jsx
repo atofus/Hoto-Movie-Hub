@@ -1,7 +1,7 @@
 import './Home.css';
 import React, { useState } from 'react'; // Removed useEffect because it's not being used
 import axios from 'axios';
-import starIcon from '../Images/star-icon.png'
+import starIcon from '../Images/star-icon.png';
 
 const Home = () => {
   const [searchTermHome, setSearchTermHome] = useState(''); // State for the search term
@@ -19,7 +19,7 @@ const Home = () => {
     } catch (error) {
       console.error("Error searching for movies:", error); // Log any errors that occur during the request
     }
-  }
+  };
 
   return (
     <div className="container">
@@ -37,24 +37,35 @@ const Home = () => {
         </button>
       </div>
 
-      {searchResultsHome.map(movie => (
-        <div className="info" key={movie.MovieId}>
-          <img src={movie.MovieImage} alt={movie.title} style={{ height: '466.67px', width: '300.33px' }} />
+      {searchResultsHome.map(movie => {
+        const releaseDate = new Date(movie.ReleaseDate);
+        const formattedDate = releaseDate.toISOString().split('T')[0];
 
-          <div className = "Star-Critic">
-          {/* Display the title of each movie */}
-          <h1 className = 'Title'  >{movie.Title}</h1> 
-          
+        return (
+          <div className="info" key={movie.MovieId}>
+            <img src={movie.MovieImage} alt={movie.title} style={{ height: '466.67px', width: '300.33px' }} />
+            <h1 className='Title' style={{ fontSize: '30px', marginLeft: '12px', fontWeight: '900' }}>{movie.Title}</h1>
 
-          <img className = "Star-icon" src={starIcon} alt="Star Icon" style={{ filter: 'brightness(0) invert(1)', height: '1em', width: '1em', height: '256px', width: '256px'}} />
-            <h2>{movie.CriticScore}</h2>
+            <div className="Star-Critic">
+              {/* Display the title of each movie */}
+              <img className="Star-icon" src={starIcon} alt="Star Icon" style={{ filter: 'brightness(0) invert(1)', height: '1em', width: '1em', height: '25.6px', width: '25.6px' }} />
+              <h2>{movie.CriticScore}</h2>
+            </div>
+
+            <div className="details" style = {{marginTop: '-240px'}} >
+              <span>{movie.AgeRating}</span>
+              <span>{formattedDate}</span>
+              <span>{movie.Runtime} min</span>
+            </div>
+            
+              <h3 style={{color: 'white', marginTop: '8px'}}>Plot:</h3>
+              <br></br>
+              <p>{movie.Plot}</p>
           </div>
-
-
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
-}
+};
 
 export default Home;

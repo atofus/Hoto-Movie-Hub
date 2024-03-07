@@ -11,6 +11,7 @@ body {
 
 
 .container {
+    margin-top: 60px;
     font-size: 16px;
     width: 90vw;
     max-width: 37.5em;
@@ -88,7 +89,22 @@ h2 {
 }
 
 .Star-Critic {
-
+    justify-content: center;
+    margin-right: -145px;
+    margin-top: -335px;
   display: flex; 
   align-items: center; 
+}
+
+.details span{
+    padding: 5px;
+}
+
+.details {
+    display: flex;
+    font-size: 0.95em;
+    justify-content: center;
+    color: #a0a0a0;
+    margin: 0.6em 0;
+    font-weight: 300;
 }
