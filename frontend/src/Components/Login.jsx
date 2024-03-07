@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { useState } from 'react';
 import 'bootswatch/dist/vapor/bootstrap.min.css';
@@ -6,12 +7,18 @@ import { Link } from "react-router-dom";
 import Register from '../Pages/Register';
 import validation from './LoginValidation';
 
+import { useNavigate } from 'react-router-dom';
+
+
+
+
 function Login() {
     const [values, setValues] = useState({
         emailReg: '',
         passwordReg: ' '
     })
 
+    const navigate = useNavigate();
     const [emailReg, setEmail] = useState("");
     const [passwordReg, setPassword] = useState("");
     const [errors, setErrors] = useState({});
@@ -22,13 +29,21 @@ function Login() {
         setErrors(validation(values));
         {
 
-            axios.post('http://localhost:3001/Login',
+            axios.post('http://localhost:3000/Login',
                 {
                     Email: emailReg,
                     Password: passwordReg
 
                 })
-                .then(res => console.log(res))
+                .then(res => {console.log(res)
+                    {
+
+                        // Backend returns success flag
+                        // Redirects to the home page
+                        navigate('/home');
+                        console.log("success")
+                    }
+                })
                 .catch(err => console.log(err));
         }
     }
