@@ -19,7 +19,7 @@ const Home = () => {
           <div class = "search-container">
               <input type="text" id="SearchBar" placeholder='Search for Movie' className="Search" name='movieReg' 
                 value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
-            <button className="searchBtn" type="submit" onClick={handleSearch}>
+            <button className="searchBtn" type="submit">
                 Search
             </button>  
             {/*<script src="server.js"></script>*/}
