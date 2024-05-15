@@ -16,6 +16,8 @@ Type "npm start" to both frontend and backend terminals to get the application r
 
 3. Search up any movie and gather information about it
 <img width="1365" alt="Screenshot 2024-05-14 at 7 46 47 PM" src="https://github.com/JustinHoUW/Hoto-Movie-Hub/assets/94030022/bf7773f2-a190-4503-8400-98eaf3aa37f6">
+<img width="1347" alt="Screenshot 2024-05-14 at 8 16 53 PM" src="https://github.com/JustinHoUW/Hoto-Movie-Hub/assets/94030022/4f56d6a8-5298-48de-b3fb-927778e72a52">
+
 
 ## Submission
 
